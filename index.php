@@ -56,11 +56,13 @@
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM bill";
-                    $result_tasks = mysqli_query($conn, $query);
+                    $query = "SELECT * FROM bill
+                    JOIN company ON bill.id_company = company.id_company
+                    JOIN person ON bill.id_person = person.id_person";
+                    $result_bills = mysqli_query($conn, $query);
 
                     $n = 1;
-                    while ($row = mysqli_fetch_array($result_tasks)) { ?>
+                    while ($row = mysqli_fetch_array($result_bills)) { ?>
                         <tr>
                             <td>
                                 <?php echo $n ?>
@@ -72,7 +74,7 @@
                                 <?php echo $row['num_bill'] ?>
                             </td>
                             <td>
-                                <?php echo $row['amount'] ?>
+                                <?php echo $row['name'] ?>
                             </td>
                             <td>
                                 <?php echo $row['observation'] ?>
